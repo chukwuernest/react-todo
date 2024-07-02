@@ -6,13 +6,14 @@ import TodoList from './TodoList'
 import AddTodoForm from '../AddTodoForm'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [newTodo, setNewTodo] = useState('')
 
   return (
     <>
       <h1>Todo List</h1>
       <TodoList />
-      <AddTodoForm />
+      <AddTodoForm onAddTodo={setNewTodo} />
+      <p>{newTodo}</p>
     </>
   )
 }
