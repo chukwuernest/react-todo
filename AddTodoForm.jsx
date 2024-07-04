@@ -10,7 +10,7 @@ function AddTodoForm(props) {
     {
       props.onAddTodo(todoTitle)
     }
-    todoTitle = ''
+    todoTitle === ''
   }
   return (
     <div>
