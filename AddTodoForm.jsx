@@ -10,13 +10,13 @@ function AddTodoForm(props) {
     {
       props.onAddTodo(todoTitle)
     }
-    event.target.title.value === ''
+    event.target.title.value = ''
   }
   return (
     <div>
       <h1>this is a AddTodoForm</h1>
       <form action='form' onSubmit={handleAddTodo}>
-        <label htmlFor='' id='todoTitle'>
+        <label htmlFor='' id='todoTitle' className='todotitle'>
           Title
         </label>
         <input type='text' id='todoTitle' name='title' />
