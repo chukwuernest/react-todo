@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function AddTodoForm(props) {
+  const [todoTitle, setTodoTitle] = useState('')
   const handleAddTodo = (event) => {
     event.preventDefault()
     var todoTitle = event.target.title.value
