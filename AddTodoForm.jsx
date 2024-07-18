@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 function AddTodoForm({ onAddTodo }) {
-  const [todoTitle, setTodoTitle] = useState([])
+  let [todoTitle, setTodoTitle] = useState([])
 
   const handleTitleChange = (event) => {
     event.preventDefault()
