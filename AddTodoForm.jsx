@@ -37,7 +37,6 @@ function AddTodoForm({ onAddTodo }) {
           name='title' 
           onChange={handleTitleChange}
         </input> */}
-
         <InputWithLabel
           label='Title'
           value={todoTitle}
@@ -45,7 +44,9 @@ function AddTodoForm({ onAddTodo }) {
           id='todoTitle'
           name='title'
           onChange={handleTitleChange}
-        />
+        >
+          Title
+        </InputWithLabel>
         <button>Add</button>
       </form>
     </div>
