@@ -8,19 +8,20 @@ function App() {
   //  const useSemiPersistentState = () => {
   let [todoList, setTodoList] = useState([])
   let [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
     const loadTodoList = () => {
       return new Promise((resolve) => {
         setTimeout(() => {
           const savedTodoList = localStorage.getItem('savedTodoList')
-          return savedTodoList ? JSON.parse(savedTodoList) : []
+          const initialList = savedTodoList ? JSON.parse(savedTodoList) : []
           resolve({ data: { todoList: initialList } })
         }, 2000)
       })
     }
     loadTodoList().then((result) => {
       setTodoList(result.data.todoList)
-      setIsLoading(false) // Set loading to false after fetching data
+      setIsLoading(false)
     })
   }, [])
 
@@ -56,12 +57,26 @@ function App() {
     const updatedTodoList = todoList.filter((item) => item.id !== id)
     setTodoList(updatedTodoList)
   }
+  // return (
+  //   <>
+  //     <h1>Todo List</h1>
+  //     <AddTodoForm onAddTodo={addTodo} />
+  //     <p>{}</p>
+  //     <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+  //   </>
+  // )
   return (
     <>
       <h1>Todo List</h1>
-      <AddTodoForm onAddTodo={addTodo} />
-      <p>{}</p>
-      <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <AddTodoForm onAddTodo={addTodo} />
+          <p>{}</p>
+          <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+        </>
+      )}
     </>
   )
 }
