@@ -1,0 +1,20 @@
+.ListItem {
+  font-family: 'Arial', sans-serif;
+  color: aquamarine;
+  padding: 10px;
+  border-bottom: 1px solid #b0adad;
+  transition: color 0.1s;
+}
+.ListItem:hover {
+  font-size: 20px;
+  color: greenyellow;
+  border-bottom: 2px solid #b0adad;
+}
+.button {
+  color: rgb(233, 135, 135);
+  border: 2px solid #b0adad;
+}
+.button:hover {
+  color: red;
+  border: 2px solid #f0eeee;
+}
