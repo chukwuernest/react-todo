@@ -35,9 +35,7 @@ function App() {
 
       setTodoList(todos)
       setIsLoading(false)
-    } catch (error) {
-      console.error(error.message)
-    }
+    } catch (error) {}
   }
 
   useEffect(() => {
@@ -63,13 +61,11 @@ function App() {
   useEffect(() => {
     if (!isLoading) {
       localStorage.setItem('savedTodoList', JSON.stringify(todoList))
-      console.log(todoList)
     }
   }, [todoList, isLoading])
 
   function addTodo(newTodo) {
     setTodoList([...todoList, newTodo])
-    console.log(newTodo)
   }
 
   const removeTodo = (id) => {

@@ -6,14 +6,14 @@ function AddTodoForm({ onAddTodo }) {
 
   const handleTitleChange = (event) => {
     event.preventDefault()
-    var newTodoTitle = event.target.value
+    let newTodoTitle = event.target.value
     setTodoTitle(newTodoTitle)
   }
 
   const handleAddTodo = (event) => {
     event.preventDefault()
 
-    var todoTitle = event.target.title.value
+    let todoTitle = event.target.title.value
 
     {
       onAddTodo({ title: todoTitle, id: Date.now() })
