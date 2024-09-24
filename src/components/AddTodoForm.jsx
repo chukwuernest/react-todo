@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import InputWithLabel from './src/InputWithLabel'
+import InputWithLabel from './InputWithLabel'
 
 function AddTodoForm({ onAddTodo }) {
   let [todoTitle, setTodoTitle] = useState([])
