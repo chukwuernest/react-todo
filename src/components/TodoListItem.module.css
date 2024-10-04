@@ -1,10 +1,13 @@
 .ListItem {
   font-family: 'Arial', sans-serif;
-  color: aquamarine;
-  padding: 10px;
+  color: rgb(23, 23, 53);
+  padding: 20px;
   border-bottom: 1px solid #b0adad;
   transition: color 0.1s;
+  margin-bottom: 0.2rem;
+  background-color: rgb(203, 192, 128);
 }
+
 .ListItem:hover {
   font-size: 20px;
   color: greenyellow;
@@ -13,6 +16,9 @@
 .button {
   color: rgb(233, 135, 135);
   border: 2px solid #b0adad;
+  float: inline-end;
+
+  margin-left: auto;
 }
 .button:hover {
   color: red;
