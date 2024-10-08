@@ -7,6 +7,7 @@ import AddTodoForm from './components/AddTodoForm'
 function App() {
   let [todoList, setTodoList] = useState([])
   let [isLoading, setIsLoading] = useState(true)
+  let [sortAscend, setSortAscend] = useState(true)
 
   async function fetchData() {
     const options = {
@@ -17,7 +18,9 @@ function App() {
     }
     const url = `https://api.airtable.com/v0/${
       import.meta.env.VITE_AIRTABLE_BASE_ID
-    }/${import.meta.env.VITE_TABLE_NAME}`
+    }/${
+      import.meta.env.VITE_TABLE_NAME
+    }?view=Grid%20view&sort[0][field]=Title&sort[0][direction]=asc`
 
     try {
       const response = await fetch(url, options)
@@ -33,7 +36,31 @@ function App() {
         title: record.fields.Title,
       }))
 
-      setTodoList(todos)
+      // const sortTodos = sortedTodos(todos)
+
+      function AscendingSort(objectA, objectB) {
+        if (objectA < objectB) {
+          return -1
+        } else if (objectA > objectB) {
+          return 1
+        } else {
+          return 0
+        }
+      }
+
+      function DescendingSort(objectA, objectB) {
+        if (objectA > objectB) {
+          return -1
+        } else if (objectA < objectB) {
+          return 1
+        } else {
+          return 0
+        }
+      }
+
+      console.log('this is ', sortTodos)
+
+      setTodoList(sortTodos)
       setIsLoading(false)
     } catch (error) {}
   }
@@ -41,6 +68,21 @@ function App() {
   useEffect(() => {
     fetchData()
   }, [])
+  function sortedTodos(todo) {
+    return todo.sort((objectA, objectB) => {
+      if (AscendingSort) {
+        return AscendingSort(objectA.title, objectB.title)
+      } else {
+        return DescendingSort(objectA.title, objectB.title)
+      }
+    })
+  }
+
+  function handleSort() {
+    // const sortTodos = sortedTodos(todoList)
+    setTodoList((prevTodo) => sortedTodos(prevTodo))
+    setSortAscend(!sortAscend)
+  }
 
   useEffect(() => {
     const loadTodoList = () => {
@@ -85,6 +127,10 @@ function App() {
                 <p>Loading...</p>
               ) : (
                 <>
+                  {'sortAscend' + sortAscend}
+                  <button onClick={handleSort} className='toggle'>
+                    Choose order ascending or descending
+                  </button>
                   <AddTodoForm onAddTodo={addTodo} />
                   <p>{}</p>
                   <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
