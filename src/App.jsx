@@ -4,6 +4,26 @@ import './App.css'
 import TodoList from './components/TodoList'
 import AddTodoForm from './components/AddTodoForm'
 
+function AscendingSort(objectA, objectB) {
+  if (objectA < objectB) {
+    return 1
+  } else if (objectA > objectB) {
+    return -1
+  } else {
+    return 0
+  }
+}
+
+function DescendingSort(objectA, objectB) {
+  if (objectA > objectB) {
+    return -1
+  } else if (objectA < objectB) {
+    return 1
+  } else {
+    return 0
+  }
+}
+
 function App() {
   let [todoList, setTodoList] = useState([])
   let [isLoading, setIsLoading] = useState(true)
@@ -34,33 +54,12 @@ function App() {
       const todos = data.records.map((record) => ({
         id: record.id,
         title: record.fields.Title,
+        createdTime: record.createdTime,
       }))
 
-      // const sortTodos = sortedTodos(todos)
+      console.log('this is ', todos)
 
-      function AscendingSort(objectA, objectB) {
-        if (objectA < objectB) {
-          return -1
-        } else if (objectA > objectB) {
-          return 1
-        } else {
-          return 0
-        }
-      }
-
-      function DescendingSort(objectA, objectB) {
-        if (objectA > objectB) {
-          return -1
-        } else if (objectA < objectB) {
-          return 1
-        } else {
-          return 0
-        }
-      }
-
-      console.log('this is ', sortTodos)
-
-      setTodoList(sortTodos)
+      setTodoList(todos)
       setIsLoading(false)
     } catch (error) {}
   }
@@ -68,19 +67,19 @@ function App() {
   useEffect(() => {
     fetchData()
   }, [])
-  function sortedTodos(todo) {
-    return todo.sort((objectA, objectB) => {
-      if (AscendingSort) {
-        return AscendingSort(objectA.title, objectB.title)
+  function sortTodos(todos) {
+    return todos.sort((objectA, objectB) => {
+      if (sortAscend) {
+        return AscendingSort(objectA.createdTime, objectB.createdTime)
       } else {
-        return DescendingSort(objectA.title, objectB.title)
+        return DescendingSort(objectA.createdTime, objectB.createdTime)
       }
     })
   }
 
   function handleSort() {
     // const sortTodos = sortedTodos(todoList)
-    setTodoList((prevTodo) => sortedTodos(prevTodo))
+    setTodoList((prevTodos) => sortTodos(prevTodos))
     setSortAscend(!sortAscend)
   }
 
