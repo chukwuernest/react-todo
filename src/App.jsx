@@ -67,11 +67,7 @@ function App() {
   }, []);
   function sortTodos(todos, sortAscend) {
     return todos.sort((objectA, objectB) => {
-      // if (sortAscend) {
-      //   return AscendingSort(objectA.title, objectB.title)
-      // } else {
-      //   return DescendingSort(objectA.title, objectB.title)
-      // };
+     
       if (sortAscend) {
         return AscendingSort(objectA.createdTime, objectB.createdTime)
       } else {
@@ -142,6 +138,6 @@ function App() {
       </Routes>
     </BrowserRouter>
   )
-}
+};
 
 export default App;
