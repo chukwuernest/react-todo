@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from 'react'
-import PropType from 'prop-types'
+import React, { useRef, useEffect } from 'react';
+import PropType from 'prop-types';
 
 function InputWithLabel({
   autoFocus,
@@ -31,13 +31,13 @@ function InputWithLabel({
       ></input>
     </>
   )
-}
+};
 InputWithLabel.PropType = {
   id: PropType.func,
   value: PropType.func,
   type: PropType.func,
   name: PropType.func,
   children: PropType.func,
-}
+};
 
-export default InputWithLabel
+export default InputWithLabel;

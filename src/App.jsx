@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import './App.css'
-import TodoList from './components/TodoList'
-import AddTodoForm from './components/AddTodoForm'
+import { useEffect, useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './App.css';
+import TodoList from './components/TodoList';
+import AddTodoForm from './components/AddTodoForm';
 
 function AscendingSort(objectA, objectB) {
   if (objectA < objectB) {
@@ -12,7 +12,7 @@ function AscendingSort(objectA, objectB) {
   } else {
     return 0
   }
-}
+};
 
 function DescendingSort(objectA, objectB) {
   if (objectA > objectB) {
@@ -22,20 +22,20 @@ function DescendingSort(objectA, objectB) {
   } else {
     return 0
   }
-}
+};
 
 function App() {
-  let [todoList, setTodoList] = useState([])
-  let [isLoading, setIsLoading] = useState(true)
-  let [sortAscend, setSortAscend] = useState(true)
+  let [todoList, setTodoList] = useState([]);
+  let [isLoading, setIsLoading] = useState(true);
+  let [sortAscend, setSortAscend] = useState(true);
 
   async function fetchData() {
     const options = {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`
-      }
-    }
+      },
+    };
     const url = `https://api.airtable.com/v0/${
       import.meta.env.VITE_AIRTABLE_BASE_ID
     }/${
@@ -43,45 +43,45 @@ function App() {
     }?view=Grid%20view&sort[0][field]=Title&sort[0][direction]=asc`
 
     try {
-      const response = await fetch(url, options)
+      const response = await fetch(url, options);
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`)
-      }
+      };
 
-      const data = await response.json()
+      const data = await response.json();
 
       const todos = data.records.map((record) => ({
         id: record.id,
         title: record.fields.Title,
         createdTime: record.createdTime
-      }))
+      }));
 
-      setTodoList(todos)
-      setIsLoading(false)
+      setTodoList(todos);
+      setIsLoading(false);
     } catch (error) {}
   }
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
   function sortTodos(todos, sortAscend) {
     return todos.sort((objectA, objectB) => {
       // if (sortAscend) {
       //   return AscendingSort(objectA.title, objectB.title)
       // } else {
       //   return DescendingSort(objectA.title, objectB.title)
-      // }
+      // };
       if (sortAscend) {
         return AscendingSort(objectA.createdTime, objectB.createdTime)
       } else {
         return DescendingSort(objectA.createdTime, objectB.createdTime)
       }
-    })
+    });
   }
   function handleSort() {
     setSortAscend(!sortAscend)
-    setTodoList((prevTodos) => sortTodos(prevTodos, !sortAscend))
+    setTodoList((prevTodos) => sortTodos(prevTodos, !sortAscend));
   }
 
   useEffect(() => {
@@ -98,22 +98,22 @@ function App() {
       setTodoList(result.data.todoList)
       setIsLoading(false)
     })
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (!isLoading) {
       localStorage.setItem('savedTodoList', JSON.stringify(todoList))
     }
-  }, [todoList, isLoading])
+  }, [todoList, isLoading]);
 
   function addTodo(newTodo) {
-    setTodoList([...todoList, newTodo])
+    setTodoList([...todoList, newTodo]);
   }
 
   const removeTodo = (id) => {
     const updatedTodoList = todoList.filter((item) => item.id !== id)
     setTodoList(updatedTodoList)
-  }
+  };
 
   return (
     <BrowserRouter>
@@ -144,4 +144,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

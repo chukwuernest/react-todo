@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import InputWithLabel from './InputWithLabel'
-import PropType from 'prop-types'
+import React, { useState } from 'react';
+import InputWithLabel from './InputWithLabel';
+import PropType from 'prop-types';
 
 function AddTodoForm({ onAddTodo }) {
   let [todoTitle, setTodoTitle] = useState([])
@@ -9,7 +9,7 @@ function AddTodoForm({ onAddTodo }) {
     event.preventDefault()
     let newTodoTitle = event.target.value
     setTodoTitle(newTodoTitle)
-  }
+  };
 
   const handleAddTodo = (event) => {
     event.preventDefault()
@@ -21,7 +21,7 @@ function AddTodoForm({ onAddTodo }) {
     }
 
     setTodoTitle('')
-  }
+  };
   return (
     <div>
       <h1>this is a AddTodoForm</h1>
@@ -40,9 +40,9 @@ function AddTodoForm({ onAddTodo }) {
       </form>
     </div>
   )
-}
+};
 
 AddTodoForm.PropType = {
   onAddTodo: PropType.func,
-}
+};
 export default AddTodoForm
