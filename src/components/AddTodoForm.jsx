@@ -1,42 +1,31 @@
-import React, { useState } from 'react'
-import InputWithLabel from './src/InputWithLabel'
+import React, { useState } from 'react';
+import InputWithLabel from './InputWithLabel';
+import PropType from 'prop-types';
 
 function AddTodoForm({ onAddTodo }) {
   let [todoTitle, setTodoTitle] = useState([])
 
   const handleTitleChange = (event) => {
     event.preventDefault()
-    var newTodoTitle = event.target.value
+    let newTodoTitle = event.target.value
     setTodoTitle(newTodoTitle)
-  }
+  };
 
   const handleAddTodo = (event) => {
     event.preventDefault()
 
-    var todoTitle = event.target.title.value
-
-    // console.log(todoTitle)
+    let todoTitle = event.target.title.value
 
     {
       onAddTodo({ title: todoTitle, id: Date.now() })
     }
 
     setTodoTitle('')
-  }
+  };
   return (
     <div>
       <h1>this is a AddTodoForm</h1>
       <form action='form' onSubmit={handleAddTodo}>
-        {/* <label htmlFor='' id='todoTitle' className='todotitle'>
-          <h2> Title</h2>
-        </label> */}
-        {/* <input>
-          value={todoTitle},
-          type='text', 
-          id='todoTitle' 
-          name='title' 
-          onChange={handleTitleChange}
-        </input> */}
         <InputWithLabel
           label='Title'
           value={todoTitle}
@@ -51,6 +40,9 @@ function AddTodoForm({ onAddTodo }) {
       </form>
     </div>
   )
-}
+};
 
+AddTodoForm.PropType = {
+  onAddTodo: PropType.func,
+};
 export default AddTodoForm
