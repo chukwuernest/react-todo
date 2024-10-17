@@ -19,7 +19,7 @@ function TodoList({ todoList, onRemoveTodo }) {
   )
 };
 TodoList.PropType = {
-  todoList: PropType.func,
+  todoList: Prop.func,
   onRemoveTodo: PropType.func,
 };
 

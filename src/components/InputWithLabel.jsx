@@ -2,8 +2,6 @@ import React, { useRef, useEffect } from 'react';
 import PropType from 'prop-types';
 
 function InputWithLabel({
-  autoFocus,
-  label,
   id,
   value,
   type,

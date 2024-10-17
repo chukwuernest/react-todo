@@ -3,7 +3,7 @@ import InputWithLabel from './InputWithLabel';
 import PropType from 'prop-types';
 
 function AddTodoForm({ onAddTodo }) {
-  let [todoTitle, setTodoTitle] = useState([])
+  let [todoTitle, setTodoTitle] = useState('')
 
   const handleTitleChange = (event) => {
     event.preventDefault()
@@ -14,7 +14,7 @@ function AddTodoForm({ onAddTodo }) {
   const handleAddTodo = (event) => {
     event.preventDefault()
 
-    let todoTitle = event.target.title.value
+    
 
     {
       onAddTodo({ title: todoTitle, id: Date.now() })
@@ -36,7 +36,7 @@ function AddTodoForm({ onAddTodo }) {
         >
           Title
         </InputWithLabel>
-        <button>Add</button>
+        <button type='submit'>Add</button>
       </form>
     </div>
   )
